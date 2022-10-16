@@ -1,0 +1,49 @@
+<section class="pagination">
+  <% if (searchMode) { %> 
+    <% if (currentPage !== 1 && previousPage != 1) { %>
+      <a href="?search=<%=pageTitle%>&page=1">1</a>
+<%  } %>
+<% if(previousPage-1 > 1){%>
+  <a href="?search=<%=pageTitle%>&page=<%=previousPage-1%>"><%=previousPage-1%></a>
+<% } %> 
+<% if(hasPreviousPage) { %>
+    <a href="?search=<%=pageTitle%>&page=<%=previousPage%>" ><%= previousPage %></a>            
+<% } %>
+
+<a href="?search=<%=pageTitle%>&page=<%=currentPage%>" class="active"><%= currentPage %></a>   
+<% if(hasNextPage) { %>
+  <a href="?search=<%=pageTitle%>&page=<%=nextPage%>" ><%= nextPage %></a>            
+  <% } %>
+ <% if(nextPage+1 < lastPage ){ %>
+    <a href="?search=<%=pageTitle%>&page=<%=nextPage+1%>"><%=nextPage+1%></a>
+  <%}%> 
+
+  <% if(lastPage !== currentPage && nextPage !== lastPage) { %>
+      <a href="?search=<%=pageTitle%>&page=<%=lastPage%>" ><%= lastPage %></a>               
+      <% } %>    
+    
+  <% } else { %>
+<% if (currentPage !== 1 && previousPage != 1) { %>
+        <a href="?page=1">1</a>
+  <%  } %>
+  <% if(previousPage-1 > 1){%>
+    <a href="?page=<%=previousPage-1%>"><%=previousPage-1%></a>
+  <% } %> 
+  <% if(hasPreviousPage) { %>
+      <a href="?page=<%=previousPage%>" ><%= previousPage %></a>            
+  <% } %>
+
+  <a href="?page=<%=currentPage%>" class="active"><%= currentPage %></a>   
+  <% if(hasNextPage) { %>
+    <a href="?page=<%=nextPage%>" ><%= nextPage %></a>            
+    <% } %>
+   <% if(nextPage+1 < lastPage ){ %>
+      <a href="?page=<%=nextPage+1%>"><%=nextPage+1%></a>
+    <%}%> 
+ 
+    <% if(lastPage !== currentPage && nextPage !== lastPage) { %>
+        <a href="?page=<%=lastPage%>" ><%= lastPage %></a>               
+        <% } %>    
+  <% } %>
+    
+    </section>

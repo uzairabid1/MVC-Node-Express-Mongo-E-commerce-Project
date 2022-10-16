@@ -1,0 +1,49 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/cart.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main>
+            <ul class="cart__item-list">
+                <% products.forEach(p => { %>
+                    <li class="cart__item">
+                        <h1><%= p.productId.title %></h1>
+                        <h2>Quantity: <%= p.quantity %></h2>
+                    </li>
+                <% }) %>
+            </ul>
+            <hr>
+            <div class="centered">
+                <button id="order-btn" class="btn">Order</button>
+                <h2>Total Sum: <%= totalSum %> PKR</h2>
+                <script src="https://js.stripe.com/v1/"></script>
+                <script>
+                    var stripe = Stripe('pk_test_51Lt5tMDZa1tFM4TWhZCxWT1BG0A6npoAMSNAhdbVnc1zMoyYpiC6qowiHwvxZ0k7RtBARckz06s0288dRdJFR8yu00FeFmfeDz');
+                    var orderBtn = document.getElementById('order-btn');
+                    orderBtn.addEventListener('click',function(){
+                        fetch('/create-checkout', {
+                         method: 'GET',
+                         headers: {
+                            'Content-Type' : 'application/json'
+                         }    
+                        })
+                        .then(res => {
+                            if(res.ok){
+                                return res.json()
+                            }
+                            return res.json()
+                            .then(json => {
+                                Promise.reject(json)
+                            })
+                        })
+                        .then(({url}) => {
+                            window.location = url;
+                            console.log(url);
+                        })
+                    
+                    })
+                </script>        
+            </div>
+        </main>
+        <%- include('../includes/end.ejs') %>
